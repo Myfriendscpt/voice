@@ -14,6 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
       "@react-native-voice/voice": ["../src/index"]
     }
@@ -24,3 +25,4 @@
     "__tests__/**/*"
   ]
 }
+
