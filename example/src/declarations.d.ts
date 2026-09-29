@@ -31,18 +31,3 @@ declare module 'react-native' {
   export default content;
 }
 
-declare module 'react-test-renderer' {
-  const renderer: any;
-  export default renderer;
-}
-
-declare module '@jest/globals' {
-  export const it: any;
-  export const expect: any;
-  export const describe: any;
-  export const test: any;
-  export const beforeEach: any;
-  export const afterEach: any;
-  export const jest: any;
-}
-
