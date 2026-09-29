@@ -50,3 +50,41 @@ Start / Stop: Begin and end voice recognition cleanly.
 Cancel: Abort the current speech session without saving.
 Reset: Completely re-initialize the native speech engine.
 Debug Event Logs: An expandable live console showing the exact native lifecycle events (onSpeechStart, onSpeechRecognized, onSpeechResults, audio levels, and errors) as they trigger under the hood.
+
+errors 
+
+1. Runtime & Speech Behavior (Normal Operation)
+
+Silence Timeout / No Speech (ERROR_NO_MATCH / Code 7 on Android):
+
+What happens: If you tap the mic but don't say anything for 3–5 seconds, the native recognition engine automatically times out.
+Fix/Handling: This is normal engine behavior; simply tap the mic again and begin speaking.
+
+Audio Interruption / Speech Cancelled:
+
+What happens: If a phone call comes in, an alarm rings, or you navigate away while recording, the audio session is interrupted and throws an onSpeechError.
+2. Device & Permissions
+Permission Denied:
+What happens: If the user taps "Don't Allow" when the OS prompts for microphone or speech recognition permissions, the app will trigger an error (speech_denied / Code 9).
+Fix: Microphone and Speech Recognition must be re-enabled in the phone's OS Settings (Settings -> Apps -> Voice Example -> Permissions).
+3. Emulator & Simulator Quirks
+
+Android Emulator (Missing Google Speech Engine):
+
+What happens: The app status badge says "Engine Unavailable", or starting throws ERROR_CLIENT (Code 5).
+Why: Android emulators created without Google APIs / Google Play do not include Google's native Speech Recognition service.
+Fix: Use an emulator image that has Google Play Store installed, or test on a physical phone.
+
+iOS Simulator (Mic Pass-through):
+
+What happens: The simulator doesn't pick up audio.
+Fix: Ensure your Mac's input microphone is permitted under System Settings -> Privacy & Security -> Microphone -> Xcode/Simulator.
+4. Network Connectivity
+Offline Recognition (ERROR_NETWORK / Code 2 or 3):
+Android: By default, some languages stream audio to Google's servers unless offline speech language packs are downloaded in Google Assistant/Voice settings.
+iOS: Modern iPhones (A12 chip and newer) support on-device dictation for major languages, but older devices or certain regional dialects require an internet connection to reach Apple servers.
+5. Tooling & Environment
+Expo Go:
+Because this library uses custom native Java and Objective-C modules, it cannot run inside Expo Go. It must be run via standard React Native CLI (yarn android / yarn ios) or an Expo Development Client (expo run:android / expo run:ios).
+
+All of these runtime errors are intercepted by VoiceTest.tsx, which displays the code and explanation in the red ⚠️ Error Card and logs it in the collapsible Debug Event Console.
