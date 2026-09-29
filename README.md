@@ -1,5 +1,20 @@
 This app is a Speech-to-Text (Voice Recognition) application built with React Native. It demonstrates how to capture audio from the device's microphone and convert spoken words into written text in real time.
 
+It uses whichever microphone is currently active on the device running the app:
+
+1. If running on a Physical Phone or Tablet (iPhone / Android)
+Built-in Microphone: By default, it captures audio from the phone's built-in microphone (at the bottom/front of the device).
+Bluetooth Headset / Earbuds: If you are wearing AirPods, Galaxy Buds, or any Bluetooth headset, the phone routes input through the headset's mic.
+Wired Headphones: If plugged in with an inline mic, it uses that.
+2. If running on a Computer Emulator / Simulator
+iOS Simulator / Android Emulator: It uses your computer's default audio input device (e.g., your laptop's built-in microphone, a USB podcast mic, or a PC headset).
+Permissions Handled
+
+The app requests standard operating system microphone permissions before capturing audio:
+
+iOS: NSMicrophoneUsageDescription (Microphone access) & NSSpeechRecognitionUsageDescription (Speech recognition service).
+Android: RECORD_AUDIO permission.
+
 Key Features & What It Does:
 
 Real-Time Speech Recognition:
