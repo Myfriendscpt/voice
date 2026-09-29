@@ -24,5 +24,7 @@ local.properties
 
 .xcode.env.local
 
-# Visual Studio Code
+# Visual Studio Code / Visual Studio
 .vscode/
+.vs/
+
